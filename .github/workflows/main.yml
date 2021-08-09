@@ -1,0 +1,23 @@
+name: CI-CD-Pipline-to-AWS-ElasticBeanstalk
+env:
+  EB-PACKAGE_S3_BUCKET_NAME: "sergey-brekunov-flask-application"
+  EB_APPLICATION_NAME: "Myflask"
+  EB_ENVIRONMENT_NAME: "Myflask-env"
+  DEPLOY_PACKEGE_NAME : "flask_app_${{ github.sha }}.zip"
+  AWS_REGION_NAME : "eu-north-1"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs: 
+   my_ci_part:
+     runs-on: ubuntu-latest
+     
+     steps:
+     - name: Git clone our repo
+       uses: action/chekout@v1
+       
+     - name: Create ZIP deployment packege
+       run : zip -r ${{ env.DEPLOY_PACKEGE_NAME }} ./ -x *.git*
