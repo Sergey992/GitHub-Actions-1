@@ -21,3 +21,6 @@ jobs:
        
      - name: Create ZIP deployment packege
        run : zip -r ${{ env.DEPLOY_PACKEGE_NAME }} ./ -x *.git*
+     
+     - name: test
+       run: echo Hello
